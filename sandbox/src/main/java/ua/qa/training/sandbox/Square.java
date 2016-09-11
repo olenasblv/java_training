@@ -9,8 +9,12 @@ public class Square {
 
   public Square(double l){
 
-    this.l = l;  // .l - аттрибут, l- аргумент функции
+    this.l = l;  // .l - атрибут, l- аргумент функции
   }
 
+
+  public double area (){
+    return this.l * this.l;
+  }
 
 }
