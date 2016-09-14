@@ -33,9 +33,9 @@ public class HomeWork {
     Vector v1 = new Vector(p1, p2);
     Vector v2 = new Vector(p3, p4);
 
-    System.out.println("sum of vectors = " + Vector.getSumOfVectors(v1,v2) + " with static method");
+    System.out.println("sum of vectors " + Vector.getSumOfVectors(v1,v2) + " with static method");
 
-    System.out.println("sum of vectors = " + v1.getSumWithCurrentVector(v2) + " without temp");
+    System.out.println("sum of vectors " + v1.getSumWithCurrentVector(v2) + " without temp");
 
     System.out.println("scalar multiplication = " + v1.getScalarMultiplication(v2));
   }
