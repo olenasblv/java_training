@@ -3,6 +3,7 @@ package ua.qa.training.sandbox;
 /**
  * Created by osoboleva on 9/11/2016.
  */
+
 public class Point {
 
   public double x;
