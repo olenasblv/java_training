@@ -13,7 +13,17 @@ public class Point {
     this.y = y;
   }
 
-  public double distanceToPoint(Point p1) {
-    return Math.sqrt(Math.pow(p1.x - this.x, 2) + Math.pow(p1.y - this.y, 2));
+  public double distanceToPoint(Point p) {
+    return Math.sqrt(Math.pow(this.x - p.x, 2) + Math.pow(this.y - p.y, 2));
+  }
+
+  // сделать в классе Point метод, который возвращает точку, симметричную данной относительно центра координат
+
+  public Point symmetric() {
+    return new Point(-1 * x, -1 * y);
+  }
+
+  public String toString() {
+    return "x = " + x + " y = " + y;
   }
 }
