@@ -1,4 +1,4 @@
-package ua.qa.training.addressbook;
+package ua.qa.training.addressbook.model;
 
 public class GroupData {
   private final String name;
