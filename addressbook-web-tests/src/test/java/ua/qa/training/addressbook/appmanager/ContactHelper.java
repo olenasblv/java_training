@@ -8,7 +8,11 @@ import ua.qa.training.addressbook.model.ContactData;
  * Created by osoboleva on 9/18/2016.
  */
 public class ContactHelper {
-  FirefoxDriver wd;
+  private FirefoxDriver wd;
+
+  public ContactHelper(FirefoxDriver wd) {
+    this.wd = wd;
+  }
 
   public void submitContactCreation() {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
