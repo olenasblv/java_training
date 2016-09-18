@@ -33,7 +33,16 @@ public class ContactCreationTests {
 
   @Test
   public void ContactCreationTests() {
-    wd.findElement(By.linkText("add new")).click();
+    goToAddNewContact();
+    fillContactForm();
+    submitContactCreation();
+  }
+
+  private void submitContactCreation() {
+    wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+  }
+
+  private void fillContactForm() {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys("Olena");
@@ -110,7 +119,10 @@ public class ContactCreationTests {
     wd.findElement(By.name("notes")).click();
     wd.findElement(By.name("notes")).clear();
     wd.findElement(By.name("notes")).sendKeys("nvjfusdoflfd,d");
-    wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+  }
+
+  private void goToAddNewContact() {
+    wd.findElement(By.linkText("add new")).click();
   }
 
   @AfterMethod
