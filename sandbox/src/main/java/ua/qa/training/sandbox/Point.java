@@ -18,6 +18,7 @@ public class Point {
     return Math.sqrt(Math.pow(this.x - p.x, 2) + Math.pow(this.y - p.y, 2));
   }
 
+
   // сделать в классе Point метод, который возвращает точку, симметричную данной относительно центра координат
 
   public Point symmetric() {
@@ -28,3 +29,5 @@ public class Point {
     return "x = " + x + " y = " + y;
   }
 }
+
+
