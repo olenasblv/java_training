@@ -2,6 +2,7 @@ package ua.qa.training.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import ua.qa.training.addressbook.model.ContactData;
 
 /**
@@ -22,7 +23,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("middlename"), contactData.getMiddleName());
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("nickname"), contactData.getNickName());
-    click(By.name("photo"));
+    //click(By.name("photo"));
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
     type(By.name("address"), contactData.getAddress());
@@ -31,33 +32,28 @@ public class ContactHelper extends HelperBase {
     type(By.name("work"), contactData.getWorkPhone());
     type(By.name("fax"), contactData.getFax());
     type(By.name("email"), contactData.getEmail1());
-    type(By.name("email"), contactData.getEmail2());
-    type(By.name("email"), contactData.getEmail3());
+    type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
     type(By.name("homepage"), contactData.getHomePage());
 
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[21]")).isSelected()) {
-      click(By.xpath("//div[@id='content']/form/select[1]//option[21]"));
-    }
+    Select birthdayDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[1]")));
+    birthdayDay.selectByVisibleText("12");
 
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[5]")).isSelected()) {
-      click(By.xpath("//div[@id='content']/form/select[2]//option[5]"));
-    }
+    Select birthdayMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[2]")));
+    birthdayMonth.selectByVisibleText("April");
 
     type(By.name("byear"), contactData.getBirthdayYear());
 
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[26]")).isSelected()) {
-      click(By.xpath("//div[@id='content']/form/select[3]//option[26]"));
-    }
+    Select anniversaryDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[3]")));
+    anniversaryDay.selectByVisibleText("10");
 
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[4]//option[11]")).isSelected()) {
-      click(By.xpath("//div[@id='content']/form/select[4]//option[11]"));
-    }
+    Select anniversaryMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[4]")));
+    anniversaryMonth.selectByVisibleText("December");
 
     type(By.name("ayear"), contactData.getAnniversaryYear());
 
-    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).isSelected()) {
-      click(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
-    }
+    Select group = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[5]")));
+    group.selectByIndex(2);
 
     type(By.name("address2"), contactData.getAddress2());
     type(By.name("phone2"), contactData.getPhone2());
