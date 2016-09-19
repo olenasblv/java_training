@@ -29,42 +29,38 @@ public class ContactHelper extends HelperBase {
     type(By.name("home"), contactData.getHomePhone());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("work"), contactData.getWorkPhone());
-    type(By.name("fax"),contactData.getFax());
-    type(By.name("email"),contactData.getEmail1());
-    type(By.name("email"),contactData.getEmail2());
-    type(By.name("email"),contactData.getEmail3());
-    type(By.name("homepage"),contactData.getHomePage());
+    type(By.name("fax"), contactData.getFax());
+    type(By.name("email"), contactData.getEmail1());
+    type(By.name("email"), contactData.getEmail2());
+    type(By.name("email"), contactData.getEmail3());
+    type(By.name("homepage"), contactData.getHomePage());
 
-
-    if (!select(By.xpath("//div[@id='content']/form/select[1]//option[21]"))) {
+    if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[21]")).isSelected()) {
       click(By.xpath("//div[@id='content']/form/select[1]//option[21]"));
     }
+
     if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[5]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[5]")).click();
+      click(By.xpath("//div[@id='content']/form/select[2]//option[5]"));
     }
-    wd.findElement(By.name("byear")).click();
-    wd.findElement(By.name("byear")).clear();
-    wd.findElement(By.name("byear")).sendKeys(contactData.getBirthdayYear());
+
+    type(By.name("byear"), contactData.getBirthdayYear());
+
     if (!wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[26]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[3]//option[26]")).click();
+      click(By.xpath("//div[@id='content']/form/select[3]//option[26]"));
     }
+
     if (!wd.findElement(By.xpath("//div[@id='content']/form/select[4]//option[11]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[4]//option[11]")).click();
+      click(By.xpath("//div[@id='content']/form/select[4]//option[11]"));
     }
-    wd.findElement(By.name("ayear")).click();
-    wd.findElement(By.name("ayear")).clear();
-    wd.findElement(By.name("ayear")).sendKeys(contactData.getAnniversaryYear());
+
+    type(By.name("ayear"), contactData.getAnniversaryYear());
+
     if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).isSelected()) {
-      wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).click();
+      click(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
     }
-    wd.findElement(By.name("address2")).click();
-    wd.findElement(By.name("address2")).clear();
-    wd.findElement(By.name("address2")).sendKeys(contactData.getAddress2());
-    wd.findElement(By.name("phone2")).click();
-    wd.findElement(By.name("phone2")).clear();
-    wd.findElement(By.name("phone2")).sendKeys(contactData.getPhone2());
-    wd.findElement(By.name("notes")).click();
-    wd.findElement(By.name("notes")).clear();
-    wd.findElement(By.name("notes")).sendKeys(contactData.getNotes());
+
+    type(By.name("address2"), contactData.getAddress2());
+    type(By.name("phone2"), contactData.getPhone2());
+    type(By.name("notes"), contactData.getNotes());
   }
 }
