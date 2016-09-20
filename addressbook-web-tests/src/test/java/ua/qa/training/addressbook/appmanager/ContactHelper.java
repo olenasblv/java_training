@@ -59,4 +59,16 @@ public class ContactHelper extends HelperBase {
     type(By.name("phone2"), contactData.getPhone2());
     type(By.name("notes"), contactData.getNotes());
   }
+
+    public void selectContact() {
+      click(By.name("selected[]"));
+    }
+
+  public void initContactModifiction() {
+    click(By.xpath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
 }
