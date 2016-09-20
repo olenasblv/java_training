@@ -37,18 +37,18 @@ public class ContactHelper extends HelperBase {
     type(By.name("homepage"), contactData.getHomePage());
 
     Select birthdayDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[1]")));
-    birthdayDay.selectByVisibleText("12");
+    birthdayDay.selectByVisibleText(contactData.getBirthdayDay());
 
     Select birthdayMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[2]")));
-    birthdayMonth.selectByVisibleText("April");
+    birthdayMonth.selectByVisibleText(contactData.getBirthdayMonth());
 
     type(By.name("byear"), contactData.getBirthdayYear());
 
     Select anniversaryDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[3]")));
-    anniversaryDay.selectByVisibleText("10");
+    anniversaryDay.selectByVisibleText(contactData.getAnniversaryDay());
 
     Select anniversaryMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[4]")));
-    anniversaryMonth.selectByVisibleText("December");
+    anniversaryMonth.selectByVisibleText(contactData.getAnniversaryMonth());
 
     type(By.name("ayear"), contactData.getAnniversaryYear());
 

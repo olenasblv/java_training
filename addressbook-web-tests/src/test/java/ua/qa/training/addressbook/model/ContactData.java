@@ -1,6 +1,7 @@
 package ua.qa.training.addressbook.model;
 
 public class ContactData {
+  // text fields
   private final String firstName;
   private final String middleName;
   private final String lastName;
@@ -21,8 +22,17 @@ public class ContactData {
   private final String address2;
   private final String phone2;
   private final String notes;
+  // drop-downs
+  private final String birthdayDay;
+  private final String birthdayMonth;
+  private final String anniversaryDay;
+  private final String anniversaryMonth;
 
-  public ContactData(String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String homePhone, String mobilePhone, String workPhone, String fax, String email1, String email2, String email3, String homePage, String birthdayYear, String anniversaryYear, String address2, String phone2, String notes) {
+  public ContactData(String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String homePhone,
+                     String mobilePhone, String workPhone, String fax, String email1, String email2, String email3, String homePage, String birthdayYear,
+                     String anniversaryYear, String address2, String phone2, String notes, String birthdayDay, String birthdayMonth, String anniversaryDay,
+                     String anniversaryMonth) {
+    // text fields
     this.firstName = firstName;
     this.middleName = middleName;
     this.lastName = lastName;
@@ -43,6 +53,11 @@ public class ContactData {
     this.address2 = address2;
     this.phone2 = phone2;
     this.notes = notes;
+    // drop-downs
+    this.birthdayDay = birthdayDay;
+    this.birthdayMonth = birthdayMonth;
+    this.anniversaryDay = anniversaryDay;
+    this.anniversaryMonth = anniversaryMonth;
   }
 
   public String getFirstName() {
@@ -123,5 +138,21 @@ public class ContactData {
 
   public String getNotes() {
     return notes;
+  }
+
+  public String getBirthdayDay() {
+    return birthdayDay;
+  }
+
+  public String getBirthdayMonth() {
+    return birthdayMonth;
+  }
+
+  public String getAnniversaryDay() {
+    return anniversaryDay;
+  }
+
+  public String getAnniversaryMonth() {
+    return anniversaryMonth;
   }
 }
