@@ -52,8 +52,8 @@ public class ContactHelper extends HelperBase {
 
     type(By.name("ayear"), contactData.getAnniversaryYear());
 
-    Select group = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[5]")));
-    group.selectByIndex(2);
+    /*Select group = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[5]")));
+    group.selectByVisibleText("test1");*/
 
     type(By.name("address2"), contactData.getAddress2());
     type(By.name("phone2"), contactData.getPhone2());
