@@ -12,9 +12,7 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() {
         app.getNavigationHelper().goToHomePage();
         app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactForm(new ContactData("Olena1", "Evgenievna1", "Soboleva1", "osoboleva1", "QA1", "Exadel1", "City1, " +
-                "street, house,appartments", "1234567891", "987654311", "1234561", "0987651", "123456@mail.ru1", "09876@mail.ru1",
-                "qwerty@mail.ru1", "qwerty.com1", "19901", "19901", null, "City21, street2, house2", "123445665451", "nvjfusdoflfd,d1", "17", "December", "7", "June"), false);
+        app.getContactHelper().fillContactForm(new ContactData(null, null, "Address_test1", null, "email_1@mail.ru", "homepage_1.com", "20", "April", "1990", null), false);
         app.getContactHelper().submitContactModification();
     }
 }
