@@ -1,9 +1,11 @@
 package ua.qa.training.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ua.qa.training.addressbook.model.ContactData;
 
 /**
@@ -11,74 +13,78 @@ import ua.qa.training.addressbook.model.ContactData;
  */
 public class ContactHelper extends HelperBase {
 
-  public ContactHelper(WebDriver wd) {
-    super(wd);
-  }
-
-  public void submitContactCreation() {
-    click(By.xpath("//div[@id='content']/form/input[21]"));
-  }
-
-  public void fillContactForm(ContactData contactData) {
-    type(By.name("firstname"), contactData.getFirstName());
-    type(By.name("middlename"), contactData.getMiddleName());
-    type(By.name("lastname"), contactData.getLastName());
-    type(By.name("nickname"), contactData.getNickName());
-    //click(By.name("photo"));
-    type(By.name("title"), contactData.getTitle());
-    type(By.name("company"), contactData.getCompany());
-    type(By.name("address"), contactData.getAddress());
-    type(By.name("home"), contactData.getHomePhone());
-    type(By.name("mobile"), contactData.getMobilePhone());
-    type(By.name("work"), contactData.getWorkPhone());
-    type(By.name("fax"), contactData.getFax());
-    type(By.name("email"), contactData.getEmail1());
-    type(By.name("email2"), contactData.getEmail2());
-    type(By.name("email3"), contactData.getEmail3());
-    type(By.name("homepage"), contactData.getHomePage());
-
-    Select birthdayDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[1]")));
-    birthdayDay.selectByVisibleText(contactData.getBirthdayDay());
-
-    Select birthdayMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[2]")));
-    birthdayMonth.selectByVisibleText(contactData.getBirthdayMonth());
-
-    type(By.name("byear"), contactData.getBirthdayYear());
-
-    Select anniversaryDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[3]")));
-    anniversaryDay.selectByVisibleText(contactData.getAnniversaryDay());
-
-    Select anniversaryMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[4]")));
-    anniversaryMonth.selectByVisibleText(contactData.getAnniversaryMonth());
-
-    type(By.name("ayear"), contactData.getAnniversaryYear());
-
-    /*Select group = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[5]")));
-    group.selectByVisibleText("test1");*/
-
-    type(By.name("address2"), contactData.getAddress2());
-    type(By.name("phone2"), contactData.getPhone2());
-    type(By.name("notes"), contactData.getNotes());
-  }
-
-    public void selectContact() {
-      click(By.name("selected[]"));
+    public ContactHelper(WebDriver wd) {
+        super(wd);
     }
 
-  public void initContactModification() {
-    click(By.xpath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-  }
+    public void submitContactCreation() {
+        click(By.xpath("//div[@id='content']/form/input[21]"));
+    }
 
-  public void submitContactModification() {
-    click(By.name("update"));
-  }
+    public void fillContactForm(ContactData contactData, boolean creation) {
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("middlename"), contactData.getMiddleName());
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("nickname"), contactData.getNickName());
+        //click(By.name("photo"));
+        type(By.name("title"), contactData.getTitle());
+        type(By.name("company"), contactData.getCompany());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("mobile"), contactData.getMobilePhone());
+        type(By.name("work"), contactData.getWorkPhone());
+        type(By.name("fax"), contactData.getFax());
+        type(By.name("email"), contactData.getEmail1());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
+        type(By.name("homepage"), contactData.getHomePage());
 
-  public void deleteSelectedContacts() {
-    click(By.xpath(".//*[@id='content']/form[2]/div[2]/input"));
-  }
+        Select birthdayDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[1]")));
+        birthdayDay.selectByVisibleText(contactData.getBirthdayDay());
 
-  public void submitContactDeletion() {
-    wd.switchTo().alert().accept();
-  }
+        Select birthdayMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[2]")));
+        birthdayMonth.selectByVisibleText(contactData.getBirthdayMonth());
+
+        type(By.name("byear"), contactData.getBirthdayYear());
+
+        Select anniversaryDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[3]")));
+        anniversaryDay.selectByVisibleText(contactData.getAnniversaryDay());
+
+        Select anniversaryMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[4]")));
+        anniversaryMonth.selectByVisibleText(contactData.getAnniversaryMonth());
+
+        type(By.name("ayear"), contactData.getAnniversaryYear());
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+
+        type(By.name("address2"), contactData.getAddress2());
+        type(By.name("phone2"), contactData.getPhone2());
+        type(By.name("notes"), contactData.getNotes());
+    }
+
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void initContactModification() {
+        click(By.xpath(".//*[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+    }
+
+    public void submitContactModification() {
+        click(By.name("update"));
+    }
+
+    public void deleteSelectedContacts() {
+        click(By.xpath(".//*[@id='content']/form[2]/div[2]/input"));
+    }
+
+    public void submitContactDeletion() {
+        wd.switchTo().alert().accept();
+    }
 }
 

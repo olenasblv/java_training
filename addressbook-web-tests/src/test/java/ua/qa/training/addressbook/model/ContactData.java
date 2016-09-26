@@ -27,10 +27,11 @@ public class ContactData {
   private final String birthdayMonth;
   private final String anniversaryDay;
   private final String anniversaryMonth;
+  private String group;
 
   public ContactData(String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String homePhone,
                      String mobilePhone, String workPhone, String fax, String email1, String email2, String email3, String homePage, String birthdayYear,
-                     String anniversaryYear, String address2, String phone2, String notes, String birthdayDay, String birthdayMonth, String anniversaryDay,
+                     String anniversaryYear, String group, String address2, String phone2, String notes, String birthdayDay, String birthdayMonth, String anniversaryDay,
                      String anniversaryMonth) {
     // text fields
     this.firstName = firstName;
@@ -58,6 +59,7 @@ public class ContactData {
     this.birthdayMonth = birthdayMonth;
     this.anniversaryDay = anniversaryDay;
     this.anniversaryMonth = anniversaryMonth;
+    this.group = group;
   }
 
   public String getFirstName() {
@@ -154,5 +156,9 @@ public class ContactData {
 
   public String getAnniversaryMonth() {
     return anniversaryMonth;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }
