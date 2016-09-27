@@ -11,6 +11,8 @@ import ua.qa.training.addressbook.model.ContactData;
  */
 public class ContactHelper extends HelperBase {
 
+    NavigationHelper navigation = new NavigationHelper(wd);
+
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
@@ -61,6 +63,17 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactDeletion() {
         wd.switchTo().alert().accept();
+    }
+
+    public void createContact(ContactData contact) {
+        navigation.goToAddNewContact();
+        fillContactForm(contact, true);
+        submitContactCreation();
+        navigation.goToHomePage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
 
