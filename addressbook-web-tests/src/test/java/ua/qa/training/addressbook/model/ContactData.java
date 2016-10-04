@@ -73,14 +73,6 @@ public class ContactData {
     return "ContactData{" +
             "firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
-            ", address='" + address + '\'' +
-            ", homePhone='" + homePhone + '\'' +
-            ", email1='" + email1 + '\'' +
-            ", homepage='" + homepage + '\'' +
-            ", birthdayYear='" + birthdayYear + '\'' +
-            ", birthdayDay='" + birthdayDay + '\'' +
-            ", birthdayMonth='" + birthdayMonth + '\'' +
-            ", group='" + group + '\'' +
             '}';
   }
 
@@ -92,15 +84,7 @@ public class ContactData {
     ContactData that = (ContactData) o;
 
     if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-    if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
-    if (address != null ? !address.equals(that.address) : that.address != null) return false;
-    if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
-    if (email1 != null ? !email1.equals(that.email1) : that.email1 != null) return false;
-    if (homepage != null ? !homepage.equals(that.homepage) : that.homepage != null) return false;
-    if (birthdayYear != null ? !birthdayYear.equals(that.birthdayYear) : that.birthdayYear != null) return false;
-    if (birthdayDay != null ? !birthdayDay.equals(that.birthdayDay) : that.birthdayDay != null) return false;
-    if (birthdayMonth != null ? !birthdayMonth.equals(that.birthdayMonth) : that.birthdayMonth != null) return false;
-    return group != null ? group.equals(that.group) : that.group == null;
+    return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
 
   }
 
@@ -108,14 +92,6 @@ public class ContactData {
   public int hashCode() {
     int result = firstName != null ? firstName.hashCode() : 0;
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-    result = 31 * result + (address != null ? address.hashCode() : 0);
-    result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
-    result = 31 * result + (email1 != null ? email1.hashCode() : 0);
-    result = 31 * result + (homepage != null ? homepage.hashCode() : 0);
-    result = 31 * result + (birthdayYear != null ? birthdayYear.hashCode() : 0);
-    result = 31 * result + (birthdayDay != null ? birthdayDay.hashCode() : 0);
-    result = 31 * result + (birthdayMonth != null ? birthdayMonth.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
     return result;
   }
 }
