@@ -1,9 +1,11 @@
 package ua.qa.training.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.ObjectFactory;
 import org.testng.annotations.Test;
 import ua.qa.training.addressbook.model.ContactData;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -19,11 +21,16 @@ public class ContactModificationTests extends TestBase {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().initContactModification(before.size()-1);
-        app.getContactHelper().fillContactForm(new ContactData(null, null, "Address_test1", null, "email_1@mail.ru",
-                "homepage_1.com", "20", "April", "1990", null), false);
+        ContactData contact = new ContactData(null, null, "Address_test1", null, "email_1@mail.ru",
+                "homepage_1.com", "20", "April", "1990", null);
+        app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModification();
         app.getNavigationHelper().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
+
+        before.remove(before.size()-1);
+        before.add(contact);
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 }
