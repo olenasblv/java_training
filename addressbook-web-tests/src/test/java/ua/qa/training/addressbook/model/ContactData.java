@@ -2,56 +2,76 @@ package ua.qa.training.addressbook.model;
 
 public class ContactData {
 
-    private int id;
-    private final String lastName;
-    private final String firstName;
-    private final String address;
-    private final String homePhone;
-    private final String email1;
-    private final String homepage;
-    private final String birthdayYear;
-    private final String birthdayDay;
-    private final String birthdayMonth;
+    private int id = Integer.MAX_VALUE;
+    private String lastName;
+    private String firstName;
+    private String address;
+    private String homePhone;
+    private String email1;
+    private String homepage;
+    private String birthdayYear;
+    private String birthdayDay;
+    private String birthdayMonth;
     private String group;
 
-    public ContactData(String lastName, String firstName, String address, String homePhone,
-                       String email1, String homepage, String birthdayDay, String birthdayMonth, String birthdayYear, String group) {
-
-        this.id = Integer.MAX_VALUE;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.address = address;
-        this.homePhone = homePhone;
-        this.email1 = email1;
-        this.homepage = homepage;
-        this.birthdayDay = birthdayDay;
-        this.birthdayMonth = birthdayMonth;
-        this.birthdayYear = birthdayYear;
-        this.group = group;
-    }
-
-    public ContactData(int id, String lastName, String firstName, String address, String homePhone,
-                       String email1, String homepage, String birthdayDay, String birthdayMonth, String birthdayYear, String group) {
-
-        this.id = id;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.address = address;
-        this.homePhone = homePhone;
-        this.email1 = email1;
-        this.homepage = homepage;
-        this.birthdayDay = birthdayDay;
-        this.birthdayMonth = birthdayMonth;
-        this.birthdayYear = birthdayYear;
-        this.group = group;
-    }
 
     public int getId(){
         return id;
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactData withEmail1(String email1) {
+        this.email1 = email1;
+        return this;
+    }
+
+    public ContactData withHomepage(String homepage) {
+        this.homepage = homepage;
+        return this;
+    }
+
+    public ContactData withBirthdayYear(String birthdayYear) {
+        this.birthdayYear = birthdayYear;
+        return this;
+    }
+
+    public ContactData withBirthdayDay(String birthdayDay) {
+        this.birthdayDay = birthdayDay;
+        return this;
+    }
+
+    public ContactData withBirthdayMonth(String birthdayMonth) {
+        this.birthdayMonth = birthdayMonth;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
     }
 
     public String getLastName() {

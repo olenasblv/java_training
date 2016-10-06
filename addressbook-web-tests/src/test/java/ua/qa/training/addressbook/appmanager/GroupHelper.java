@@ -83,13 +83,12 @@ public class GroupHelper extends HelperBase {
     }
 
     public List<GroupData> list() {
-        List<GroupData> groups = new ArrayList<GroupData>();      // создаем список, который будем заполнять
+        List<GroupData> groups = new ArrayList<>();      // создаем список, который будем заполнять
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));      // извлечение информации со страницы
         for (WebElement element : elements) {      // переменная element пробегает по списку elements
             String name = element.getText();      // из каждого элемента получаем текст, который будет именем группы
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, name, null, null);      //создаем объект типа GroupData
-            groups.add(group);       // добавляем созданный объект в список
+            groups.add(new GroupData().withId(id).withName(name));       // добавляем созданный объект в список
         }
         return groups;
     }
