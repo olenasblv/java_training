@@ -7,7 +7,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import ua.qa.training.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by osoboleva on 9/18/2016.
@@ -84,6 +86,17 @@ public class GroupHelper extends HelperBase {
 
     public List<GroupData> list() {
         List<GroupData> groups = new ArrayList<>();      // создаем список, который будем заполнять
+        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));      // извлечение информации со страницы
+        for (WebElement element : elements) {      // переменная element пробегает по списку elements
+            String name = element.getText();      // из каждого элемента получаем текст, который будет именем группы
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            groups.add(new GroupData().withId(id).withName(name));       // добавляем созданный объект в список
+        }
+        return groups;
+    }
+
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<>();      // создаем множество типа GroupData
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));      // извлечение информации со страницы
         for (WebElement element : elements) {      // переменная element пробегает по списку elements
             String name = element.getText();      // из каждого элемента получаем текст, который будет именем группы
