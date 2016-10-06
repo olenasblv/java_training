@@ -54,8 +54,9 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initContactModification(int index) {
-        // wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).click();
+        index = index + 1;
         wd.findElement(By.xpath("//tr[@name='entry'][" + index + "]//td[8]/a")).click();
+        // wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).click();
         // wd.findElements(By.name("entry")).get(index).findElement(By.xpath(".//td[8]/a")).click();
     }
 
