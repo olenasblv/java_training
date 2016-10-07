@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ua.qa.training.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by osoboleva on 9/18/2016.
@@ -53,6 +55,10 @@ public class ContactHelper extends HelperBase {
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
     public void initContactModification(int index) {
         index = index + 1;
         wd.findElement(By.xpath("//tr[@name='entry'][" + index + "]//td[8]/a")).click();
@@ -80,8 +86,8 @@ public class ContactHelper extends HelperBase {
         navigation.homePage();
     }
 
-    public void modify(int index, ContactData contact) {
-        initContactModification(index);
+    public void modify(ContactData contact) {
+        initContactModification(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
         navigation.homePage();
@@ -89,6 +95,12 @@ public class ContactHelper extends HelperBase {
 
     public void delete(int index) {
         selectContact(index);
+        deleteSelectedContacts();
+        submitContactDeletion();
+    }
+
+    public void delete(ContactData сontact) {
+        selectContactById(сontact.getId());
         deleteSelectedContacts();
         submitContactDeletion();
     }
@@ -103,6 +115,20 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            String lastName = cells.get(1).getText();
+            String firstName = cells.get(2).getText();
+            ContactData contact = new ContactData().withId(id).withLastName(lastName).withFirstName(firstName);
+            contacts.add(contact);
+        }
+        return contacts;
+    }
+
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.tagName("td"));
