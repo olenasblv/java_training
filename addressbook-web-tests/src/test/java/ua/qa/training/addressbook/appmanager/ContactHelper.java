@@ -59,11 +59,11 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
-    public void initContactModification(int index) {
-        index = index + 1;
-        wd.findElement(By.xpath("//tr[@name='entry'][" + index + "]//td[8]/a")).click();
+    public void initContactModification(int id) {
+        //wd.findElement(By.xpath("//tr[@name='entry'][" + id + "]//td[8]/a")).click();
         // wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).click();
-        // wd.findElements(By.name("entry")).get(index).findElement(By.xpath(".//td[8]/a")).click();
+        // wd.findElements(By.name("entry")).get(index).
+        wd.findElement(By.xpath(".//td[8]/a")).click();
     }
 
     public void submitContactModification() {
@@ -93,12 +93,12 @@ public class ContactHelper extends HelperBase {
         navigation.homePage();
     }
 
-    public void delete(int index) {
+   /* public void delete(int index) {
         selectContact(index);
         deleteSelectedContacts();
         submitContactDeletion();
     }
-
+*/
     public void delete(ContactData сontact) {
         selectContactById(сontact.getId());
         deleteSelectedContacts();
@@ -132,7 +132,7 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("id"));
             String lastName = cells.get(1).getText();
             String firstName = cells.get(2).getText();
             ContactData contact = new ContactData().withId(id).withLastName(lastName).withFirstName(firstName);
