@@ -60,10 +60,9 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initContactModification(int id) {
-        //wd.findElement(By.xpath("//tr[@name='entry'][" + id + "]//td[8]/a")).click();
-        // wd.findElements(By.name("entry")).get(index).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).click();
-        // wd.findElements(By.name("entry")).get(index).
-        wd.findElement(By.xpath(".//td[8]/a")).click();
+        WebElement checkbox = wd.findElement(By.cssSelector("input[value='" + id + "']"));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        row.findElement(By.xpath(".//td[8]/a")).click();
     }
 
     public void submitContactModification() {
@@ -93,12 +92,12 @@ public class ContactHelper extends HelperBase {
         navigation.homePage();
     }
 
-   /* public void delete(int index) {
-        selectContact(index);
-        deleteSelectedContacts();
-        submitContactDeletion();
-    }
-*/
+    /* public void delete(int index) {
+         selectContact(index);
+         deleteSelectedContacts();
+         submitContactDeletion();
+     }
+ */
     public void delete(ContactData сontact) {
         selectContactById(сontact.getId());
         deleteSelectedContacts();
