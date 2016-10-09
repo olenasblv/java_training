@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.qa.training.addressbook.model.GroupData;
 import ua.qa.training.addressbook.model.Groups;
+import ua.qa.training.addressbook.tests.TestBase;
 
 import java.util.Set;
 
@@ -31,7 +32,10 @@ public class GroupModificationTests extends TestBase {
         Groups before = app.group().all();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData()
-                .withId(modifiedGroup.getId()).withName("test1").withHeader("test2").withFooter("test3");
+                .withId(modifiedGroup.getId())
+                .withName("test1")
+                .withHeader("test2")
+                .withFooter("test3");
         app.group().modify(group);
         Groups after = app.group().all();
         assertThat(after.size(), equalTo(before.size()));

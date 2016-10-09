@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.qa.training.addressbook.model.GroupData;
 import ua.qa.training.addressbook.model.Groups;
+import ua.qa.training.addressbook.tests.TestBase;
 
 import java.util.Set;
 

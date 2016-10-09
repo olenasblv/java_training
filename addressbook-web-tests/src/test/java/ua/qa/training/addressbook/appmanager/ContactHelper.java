@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ua.qa.training.addressbook.model.ContactData;
+import ua.qa.training.addressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -44,9 +45,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("byear"), contactData.getBirthdayYear());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            new Select(wd.findElement(By.name("test1"))).selectByVisibleText(contactData.getGroup());
         } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
+            Assert.assertFalse(isElementPresent(By.name("test1")));
         }
     }
 
@@ -126,8 +127,8 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    public Set<ContactData> all() {
-        Set<ContactData> contacts = new HashSet<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.tagName("td"));
