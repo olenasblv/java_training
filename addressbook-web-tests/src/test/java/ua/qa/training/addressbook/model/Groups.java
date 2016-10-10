@@ -8,6 +8,7 @@ import java.util.Set;
 /**
  * Created by osoboleva on 10/9/2016.
  */
+//контейнер для хранения множества групп
 public class Groups extends ForwardingSet<GroupData> {
 
     private Set<GroupData> delegate;
