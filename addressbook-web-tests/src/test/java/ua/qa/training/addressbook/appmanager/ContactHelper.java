@@ -45,9 +45,9 @@ public class ContactHelper extends HelperBase {
         type(By.name("byear"), contactData.getBirthdayYear());
 
         if (creation) {
-            new Select(wd.findElement(By.name("test1"))).selectByVisibleText(contactData.getGroup());
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
-            Assert.assertFalse(isElementPresent(By.name("test1")));
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
 
