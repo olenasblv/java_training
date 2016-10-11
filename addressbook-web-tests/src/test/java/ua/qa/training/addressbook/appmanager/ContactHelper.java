@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ua.qa.training.addressbook.model.ContactData;
 import ua.qa.training.addressbook.model.Contacts;
+import ua.qa.training.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -51,11 +52,6 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
-    }
-
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
@@ -83,6 +79,7 @@ public class ContactHelper extends HelperBase {
         navigation.goToAddNewContact();
         fillContactForm(contact, true);
         submitContactCreation();
+        contactCache = null;
         navigation.homePage();
     }
 
@@ -90,19 +87,15 @@ public class ContactHelper extends HelperBase {
         initContactModification(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
+        contactCache = null;
         navigation.homePage();
     }
 
-    /* public void delete(int index) {
-         selectContact(index);
-         deleteSelectedContacts();
-         submitContactDeletion();
-     }
- */
     public void delete(ContactData сontact) {
         selectContactById(сontact.getId());
         deleteSelectedContacts();
         submitContactDeletion();
+        contactCache = null;
     }
 
     public boolean isThereAContact() {
@@ -113,22 +106,13 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> list() {
-        List<ContactData> contacts = new ArrayList<>();
-        List<WebElement> elements = wd.findElements(By.name("entry"));
-        for (WebElement element : elements) {
-            List<WebElement> cells = element.findElements(By.tagName("td"));
-            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            String lastName = cells.get(1).getText();
-            String firstName = cells.get(2).getText();
-            ContactData contact = new ContactData().withId(id).withLastName(lastName).withFirstName(firstName);
-            contacts.add(contact);
-        }
-        return contacts;
-    }
+    private Contacts contactCache = null;
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null){
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             List<WebElement> cells = element.findElements(By.tagName("td"));
@@ -136,9 +120,9 @@ public class ContactHelper extends HelperBase {
             String lastName = cells.get(1).getText();
             String firstName = cells.get(2).getText();
             ContactData contact = new ContactData().withId(id).withLastName(lastName).withFirstName(firstName);
-            contacts.add(contact);
+            contactCache.add(contact);
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 }
 
