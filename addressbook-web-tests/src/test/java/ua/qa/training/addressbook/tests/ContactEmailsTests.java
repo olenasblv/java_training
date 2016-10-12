@@ -3,7 +3,6 @@ package ua.qa.training.addressbook.tests;
 import org.testng.annotations.Test;
 import ua.qa.training.addressbook.model.ContactData;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,8 +27,7 @@ public class ContactEmailsTests extends TestBase {
         return Stream.of(contact.getEmail(), contact.getEmail2(), contact.getEmail3()).filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
     }
 
-    /*public static String cleaned(String phone){
-        return phone.replaceAll("\\s","").replaceAll("[-()]","");
+   /* public static String cleaned(String email) {
+        return email.replaceAll("\\s", "");
     }*/
 }
-//kkkjmjpj
