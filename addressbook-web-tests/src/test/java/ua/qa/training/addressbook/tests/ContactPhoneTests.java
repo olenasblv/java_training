@@ -13,10 +13,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Created by osoboleva on 11.10.2016.
  */
-public class ContactPhoneTests extends TestBase{
+public class ContactPhoneTests extends TestBase {
 
     @Test
-    public void testContactPhones(){
+    public void testContactPhones() {
         app.goTo().homePage();
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
@@ -25,13 +25,13 @@ public class ContactPhoneTests extends TestBase{
     }
 
     private String mergePhones(ContactData contact) {
-        return Stream.of(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()).filter((s)-> ! s.equals(""))
+        return Stream.of(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()).filter((s) -> !s.equals(""))
                 .map(ContactPhoneTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 
-    public static String cleaned(String phone){
-        return phone.replaceAll("\\s","").replaceAll("[-()]","");
+    public static String cleaned(String phone) {
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
 }
 
