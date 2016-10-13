@@ -9,6 +9,7 @@ import ua.qa.training.addressbook.model.ContactData;
 import ua.qa.training.addressbook.model.Contacts;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by osoboleva on 9/18/2016.
@@ -32,14 +33,17 @@ public class ContactHelper extends HelperBase {
         type(By.name("home"), contactData.getHomePhone());
         type(By.name("email"), contactData.getEmail());
         type(By.name("homepage"), contactData.getHomepage());
-
-        Select birthdayDay = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[1]")));
-        birthdayDay.selectByVisibleText(contactData.getBirthdayDay());
-
-        Select birthdayMonth = new Select(wd.findElement(By.xpath("//div[@id='content']/form/select[2]")));
-        birthdayMonth.selectByVisibleText(contactData.getBirthdayMonth());
-
         type(By.name("byear"), contactData.getBirthdayYear());
+
+        if (contactData.getBirthdayDay() != null) {
+            Select birthdayDay = new Select(wd.findElement(By.name("bday")));
+            birthdayDay.selectByVisibleText(contactData.getBirthdayDay());
+        }
+
+        if (contactData.getBirthdayMonth() != null) {
+            Select birthdayMonth = new Select(wd.findElement(By.name("bmonth")));
+            birthdayMonth.selectByVisibleText(contactData.getBirthdayMonth());
+        }
 
         if (creation) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -59,7 +63,7 @@ public class ContactHelper extends HelperBase {
     }
 
     private void initContactModificationById(int id) {
-        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']",id)));
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
@@ -67,6 +71,13 @@ public class ContactHelper extends HelperBase {
         //wd.findElement(By.xpath(String.format("//input[value='%s']./../../td[8]/a",id))).click();
         //wd.findElement(By.xpath(String.format("//tr[.//input[value='%s']]/td[8]/a"))).click();
         //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
+    }
+
+    private void clickContactDetailsById(int id) {
+        wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
+
+        //wd.findElement(By.xpath(String.format("//input[value='%s']./../../td[7]/a",id))).click();
+        //wd.findElement(By.xpath(String.format("//tr[.//input[value='%s']]/td[7]/a"))).click();
     }
 
     public void submitContactModification() {
@@ -141,17 +152,25 @@ public class ContactHelper extends HelperBase {
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
         String address = wd.findElement(By.name("address")).getAttribute("value");
-        String home = wd.findElement(By.name("home")).getAttribute("value");
-        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
-        String work = wd.findElement(By.name("work")).getAttribute("value");
         String email = wd.findElement(By.name("email")).getAttribute("value");
         String email2 = wd.findElement(By.name("email2")).getAttribute("value");
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
                 .withAddress(address)
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
                 .withEmail(email).withEmail2(email2).withEmail3(email3);
     }
+
+
+    public ContactData infoFromDetailsPage(ContactData contact) {
+        clickContactDetailsById(contact.getId());
+        String contactDetails = wd.findElement(By.id("content")).getText();
+        return new ContactData().withDetails(contactDetails);
+    }
+
 }
 

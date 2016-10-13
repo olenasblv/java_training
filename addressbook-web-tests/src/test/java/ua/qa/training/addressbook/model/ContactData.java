@@ -19,7 +19,16 @@ public class ContactData {
     private String group;
     private String allPhones;
     private String allEmails;
+    private String details;
 
+    public String getDetails() {
+        return details;
+    }
+
+    public ContactData withDetails(String details) {
+        this.details = details;
+        return this;
+    }
 
 
     public String getAllEmails() {
