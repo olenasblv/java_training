@@ -34,7 +34,7 @@ public class ContactDetailsPageTests extends TestBase {
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromDetailsPage = app.contact().infoFromDetailsPage(contact);
 
-        assertThat(mergeInfoFromEditForm(contact), equalTo(cleaned(contactInfoFromDetailsPage.getDetails())));
+        assertThat(mergeInfoFromEditForm(contact), equalTo(contactInfoFromDetailsPage.getDetails()));
 
     }
 
@@ -45,13 +45,20 @@ public class ContactDetailsPageTests extends TestBase {
                 contactInfoFromEditForm.getAddress(),
                 contactInfoFromEditForm.getEmail(), contactInfoFromEditForm.getEmail2(),contactInfoFromEditForm.getEmail3(),
                 contactInfoFromEditForm.getHomePhone(), contactInfoFromEditForm.getMobilePhone(), contactInfoFromEditForm.getWorkPhone())
-                .filter((s) -> !s.equals(""))
+                .filter((s) -> s != null && !s.equals(""))
+                .map(ContactDetailsPageTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 
     public static String cleaned(String details) {
-        return details.replaceAll("[-()]", "").replaceAll("www.test.com", "")
-                .replaceAll("H: ", "").replaceAll("M: ", "").replaceAll("W: ", "")
-                .replaceAll("\n\n", "\n").replaceFirst(" ","\n").replaceAll(" ","");
+        return details
+                .replaceAll("[-()]", "")
+                .replaceAll("www.test.com", "")
+                .replaceAll("H: ", "")
+                .replaceAll("M: ", "")
+                .replaceAll("W: ", "")
+                .replaceAll("\n\n", "\n")
+                .replaceFirst(" ","\n")
+                .replaceAll(" ","");
     }
 }
