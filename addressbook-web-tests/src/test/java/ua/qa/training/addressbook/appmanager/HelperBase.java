@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.File;
+
 /**
  * Created by osoboleva on 9/19/2016.
  */
@@ -31,6 +33,13 @@ public class HelperBase {
             }
         }
     }
+
+    protected void attach(By locator, File file) {
+        if (file != null) {
+            wd.findElement(locator).sendKeys(file.getAbsolutePath());
+        }
+    }
+
 
     public boolean isAlertPresent() {
         try {

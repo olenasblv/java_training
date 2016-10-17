@@ -33,6 +33,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("email"), contactData.getEmail());
         type(By.name("homepage"), contactData.getHomepage());
         type(By.name("byear"), contactData.getBirthdayYear());
+        attach(By.name("photo"),contactData.getPhoto());
 
         if (contactData.getBirthdayDay() != null) {
             Select birthdayDay = new Select(wd.findElement(By.name("bday")));

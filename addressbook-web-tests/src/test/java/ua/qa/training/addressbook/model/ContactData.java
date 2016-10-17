@@ -1,5 +1,7 @@
 package ua.qa.training.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
 
     private int id = Integer.MAX_VALUE;
@@ -20,6 +22,18 @@ public class ContactData {
     private String allPhones;
     private String allEmails;
     private String details;
+    private File photo;
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
+    }
+
+
 
     public String getDetails() {
         return details;
