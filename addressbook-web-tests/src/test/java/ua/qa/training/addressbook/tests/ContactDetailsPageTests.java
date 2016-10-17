@@ -34,31 +34,63 @@ public class ContactDetailsPageTests extends TestBase {
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromDetailsPage = app.contact().infoFromDetailsPage(contact);
 
-        assertThat(mergeInfoFromEditForm(contact), equalTo(contactInfoFromDetailsPage.getDetails()));
-
+        assertThat(contactInfoFromDetailsPage.getDetails(), equalTo(mergeInfoFromEditForm(contact)));
     }
 
+
+
+
+
     private String mergeInfoFromEditForm(ContactData contact) {
-        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
         return Stream.of(
-                contactInfoFromEditForm.getFirstName(), contactInfoFromEditForm.getLastName(),
-                contactInfoFromEditForm.getAddress(),
-                contactInfoFromEditForm.getEmail(), contactInfoFromEditForm.getEmail2(),contactInfoFromEditForm.getEmail3(),
-                contactInfoFromEditForm.getHomePhone(), contactInfoFromEditForm.getMobilePhone(), contactInfoFromEditForm.getWorkPhone())
+                fullNameAndAddress(contact),
+                allPhones(contact),
+                allEmails(contact))
+                .filter((s) -> s != null && !s.equals(""))
+                .map(ContactDetailsPageTests::cleaned)
+                .collect(Collectors.joining("\n\n"));
+    }
+
+    private String fullName(ContactData contact){
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+        return Stream.of(contactInfoFromEditForm.getFirstName(),contactInfoFromEditForm.getLastName())
+                .filter((s) -> s != null && !s.equals(""))
+                .map(ContactDetailsPageTests::cleaned)
+                .collect(Collectors.joining(" "));
+    }
+
+    private String fullNameAndAddress(ContactData contact){
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+        return Stream.of(fullName(contact),contactInfoFromEditForm.getAddress())
                 .filter((s) -> s != null && !s.equals(""))
                 .map(ContactDetailsPageTests::cleaned)
                 .collect(Collectors.joining("\n"));
     }
 
-    public static String cleaned(String details) {
-        return details
-                .replaceAll("[-()]", "")
-                .replaceAll("www.test.com", "")
-                .replaceAll("H: ", "")
-                .replaceAll("M: ", "")
-                .replaceAll("W: ", "")
-                .replaceAll("\n\n", "\n")
-                .replaceFirst(" ","\n")
-                .replaceAll(" ","");
+    private String allPhones(ContactData contact){
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+        return Stream.of(
+                ("H: "+contactInfoFromEditForm.getHomePhone()),
+                ("M: "+ contactInfoFromEditForm.getMobilePhone()),
+                ("W: "+contactInfoFromEditForm.getWorkPhone()))
+                .filter((s) -> s != null && !s.equals(""))
+                .map(ContactDetailsPageTests::cleaned)
+                .collect(Collectors.joining("\n"));
+    }
+
+
+    private String allEmails(ContactData contact){
+        ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+        return Stream.of(
+                (contactInfoFromEditForm.getEmail()+" (www."+contactInfoFromEditForm.getEmail().substring(contactInfoFromEditForm.getEmail().lastIndexOf("@") +1)+")"),
+                (contactInfoFromEditForm.getEmail2()+" (www."+contactInfoFromEditForm.getEmail2().substring(contactInfoFromEditForm.getEmail2().lastIndexOf("@") +1)+")"),
+                (contactInfoFromEditForm.getEmail3()+" (www."+contactInfoFromEditForm.getEmail3().substring(contactInfoFromEditForm.getEmail3().lastIndexOf("@") +1)+")"))
+                .filter((s) -> s != null && !s.equals(""))
+                .map(ContactDetailsPageTests::cleaned)
+                .collect(Collectors.joining("\n"));
+    }
+
+    public static String cleaned(String contact) {
+        return contact.trim();
     }
 }

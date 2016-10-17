@@ -36,11 +36,13 @@ public class ContactPhoneTests extends TestBase {
     }
 
     private String mergePhones(ContactData contact) {
-        return Stream.of(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone()).filter((s) -> !s.equals(""))
+        return Stream.of(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+                .filter((s) -> !s.equals("")) //выбрасываем строки, которые пустые
                 .map(ContactPhoneTests::cleaned)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining("\n")); //коллектор, склеивает все элементы потока в одну большую строку. "\n" - разделитель. строчка, которая будет вставляться между склеиваемыми фрагментами
     }
 
+    // функция удаляет ненужные символы
     public static String cleaned(String phone) {
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }

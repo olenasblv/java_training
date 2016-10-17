@@ -27,7 +27,11 @@ public class ContactAddressTest extends TestBase{
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-        assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+        assertThat(contact.getAddress(), equalTo(cleaned(contactInfoFromEditForm.getAddress())));
+    }
+
+    public static String cleaned(String contact) {
+        return contact.trim();
     }
 
 }

@@ -9,7 +9,6 @@ import ua.qa.training.addressbook.model.ContactData;
 import ua.qa.training.addressbook.model.Contacts;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created by osoboleva on 9/18/2016.
@@ -75,7 +74,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    private void clickContactDetailsById(int id) {
+    private void openContactDetailsById(int id) {
         wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
 
         //wd.findElement(By.xpath(String.format("//input[value='%s']./../../td[7]/a",id))).click();
@@ -169,8 +168,9 @@ public class ContactHelper extends HelperBase {
 
 
     public ContactData infoFromDetailsPage(ContactData contact) {
-        clickContactDetailsById(contact.getId());
+        openContactDetailsById(contact.getId());
         String contactDetails = wd.findElement(By.id("content")).getText();
+        wd.navigate().back();
         return new ContactData().withDetails(contactDetails);
     }
 
