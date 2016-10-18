@@ -6,6 +6,7 @@ import ua.qa.training.addressbook.model.GroupData;
 import ua.qa.training.addressbook.model.Groups;
 import ua.qa.training.addressbook.tests.TestBase;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,11 +17,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GroupCreationTests extends TestBase {
 
     @DataProvider
-    public Iterator<Object[]> validGroups() {
+    public Iterator<Object[]> validGroups() throws IOException {
         List<Object[]> list = new ArrayList<>(); //заполняем список массивовю каждый массив содержит набор данных для 1 запуска тестового метода
-        list.add(new Object[]{new GroupData().withName("test1").withHeader("header 1").withFooter("footer 1")});
-        list.add(new Object[]{new GroupData().withName("test2").withHeader("header 2").withFooter("footer 2")});
-        list.add(new Object[]{new GroupData().withName("test3").withHeader("header 3").withFooter("footer 3")});
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+        String line = reader.readLine();
+        while (line != null){
+            String[] split = line.split(";"); //каждую строку делим на части
+            list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])}); // строим из полученных кусков масив, который состоит из объектов и добавляем его в список
+            line = reader.readLine();
+        }
         return list.iterator();
     }
 
