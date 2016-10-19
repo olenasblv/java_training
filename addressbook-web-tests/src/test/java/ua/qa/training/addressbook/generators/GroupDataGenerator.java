@@ -16,6 +16,7 @@ import java.util.Scanner;
 /**
  * Created by osoboleva on 17.10.2016.
  */
+//-c 5 -f src/test/resources/groups.csv
 public class GroupDataGenerator {
 
     @Parameter(names = "-c", description = "Group count")
@@ -29,7 +30,7 @@ public class GroupDataGenerator {
         JCommander jCommander = new JCommander(generator);
         try {
             jCommander.parse(args);
-        } catch (ParameterException ex){
+        } catch (ParameterException ex) {
             jCommander.usage();
             return;
         }
