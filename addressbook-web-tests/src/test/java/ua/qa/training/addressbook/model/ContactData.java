@@ -1,15 +1,11 @@
 package ua.qa.training.addressbook.model;
 
 import com.google.gson.annotations.Expose;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import java.io.File;
 
-@XStreamAlias("contact")
 public class ContactData {
 
-    @XStreamOmitField
     private int id = Integer.MAX_VALUE;
     @Expose
     private String lastName;
@@ -19,35 +15,26 @@ public class ContactData {
     private String address;
     @Expose
     private String homePhone;
-    @XStreamOmitField
     private String mobilePhone;
-    @XStreamOmitField
     private String workPhone;
     @Expose
     private String email;
-    @XStreamOmitField
     private String email2;
-    @XStreamOmitField
     private String email3;
     @Expose
     private String homepage;
     @Expose
-    private String birthdayYear;
+    private int birthdayYear;
     @Expose
-    private String birthdayDay;
+    private int birthdayDay;
     @Expose
     private String birthdayMonth;
     @Expose
     private String group;
-    @XStreamOmitField
     private String allPhones;
-    @XStreamOmitField
     private String allEmails;
-    @XStreamOmitField
     private String details;
-    @Expose
     private File photo;
-
 
 
     public int getId() {
@@ -149,21 +136,21 @@ public class ContactData {
         return homepage;
     }
 
-    public ContactData withBirthdayYear(String birthdayYear) {
+    public ContactData withBirthdayYear(int birthdayYear) {
         this.birthdayYear = birthdayYear;
         return this;
     }
 
-    public String getBirthdayYear() {
+    public int getBirthdayYear() {
         return birthdayYear;
     }
 
-    public ContactData withBirthdayDay(String birthdayDay) {
+    public ContactData withBirthdayDay(int birthdayDay) {
         this.birthdayDay = birthdayDay;
         return this;
     }
 
-    public String getBirthdayDay() {
+    public int getBirthdayDay() {
         return birthdayDay;
     }
 
@@ -213,20 +200,13 @@ public class ContactData {
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = this.photo;
         return this;
     }
 
     public File getPhoto() {
         return photo;
     }
-
-
-
-
-
-
-
 
 
     @Override

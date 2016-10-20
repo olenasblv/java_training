@@ -1,0 +1,35 @@
+[
+  {
+    "lastName": "lastname 0",
+    "firstName": "firstname 0",
+    "address": "address 0",
+    "homePhone": "(123)0",
+    "email": "email0@email.com",
+    "homepage": "homepage0.com",
+    "birthdayYear": 1924,
+    "birthdayDay": 26,
+    "birthdayMonth": "December"
+  },
+  {
+    "lastName": "lastname 1",
+    "firstName": "firstname 1",
+    "address": "address 1",
+    "homePhone": "(123)1",
+    "email": "email1@email.com",
+    "homepage": "homepage1.com",
+    "birthdayYear": 1928,
+    "birthdayDay": 28,
+    "birthdayMonth": "March"
+  },
+  {
+    "lastName": "lastname 2",
+    "firstName": "firstname 2",
+    "address": "address 2",
+    "homePhone": "(123)2",
+    "email": "email2@email.com",
+    "homepage": "homepage2.com",
+    "birthdayYear": 1931,
+    "birthdayDay": 28,
+    "birthdayMonth": "January"
+  }
+]

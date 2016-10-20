@@ -32,12 +32,12 @@ public class ContactHelper extends HelperBase {
         type(By.name("home"), contactData.getHomePhone());
         type(By.name("email"), contactData.getEmail());
         type(By.name("homepage"), contactData.getHomepage());
-        type(By.name("byear"), contactData.getBirthdayYear());
-        attach(By.name("photo"),contactData.getPhoto());
+        type(By.name("byear"), Integer.toString(contactData.getBirthdayYear()));
+        attach(By.name("photo"), contactData.getPhoto());
 
-        if (contactData.getBirthdayDay() != null) {
+        if (contactData.getBirthdayDay() != 0) {
             Select birthdayDay = new Select(wd.findElement(By.name("bday")));
-            birthdayDay.selectByVisibleText(contactData.getBirthdayDay());
+            birthdayDay.selectByIndex(contactData.getBirthdayDay());
         }
 
         if (contactData.getBirthdayMonth() != null) {
@@ -63,7 +63,7 @@ public class ContactHelper extends HelperBase {
     }
 
     private void initContactModificationById(int id) {
-        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']",id))).click();
+        wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
 
         /*WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
         WebElement row = checkbox.findElement(By.xpath("./../.."));
