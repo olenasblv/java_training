@@ -29,7 +29,6 @@ public class ApplicationManager {
     private String browser;
 
     public ApplicationManager(String browser) {
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         this.browser = browser;
         properties = new Properties();
     }
