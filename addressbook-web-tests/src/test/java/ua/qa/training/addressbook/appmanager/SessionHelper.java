@@ -2,7 +2,6 @@ package ua.qa.training.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by osoboleva on 9/19/2016.
