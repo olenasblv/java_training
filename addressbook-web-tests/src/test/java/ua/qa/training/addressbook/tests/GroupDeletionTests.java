@@ -20,7 +20,6 @@ public class GroupDeletionTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-
         if (app.db().groups().size() == 0) {
             app.goTo().groupPage();
             app.group().create(new GroupData().withName("test1"));
@@ -31,6 +30,7 @@ public class GroupDeletionTests extends TestBase {
     public void testGroupDeletion() {
         Groups before = app.db().groups();
         GroupData deletedGroup = before.iterator().next(); // итератор послежовательно перебирает элементы, next вернет первый попавшийся элемент множества
+        app.goTo().groupPage();
         app.group().delete(deletedGroup);
         assertThat(app.group().count(), equalTo(before.size()- 1));
         Groups after = app.db().groups();
