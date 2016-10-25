@@ -1,15 +1,27 @@
-test 0;header
-0;footer
-0
-test 1;header
-1;footer
-1
-test 2;header
-2;footer
-2
-test 3;header
-3;footer
-3
-test 4;header
-4;footer
-4
+[
+  {
+    "name": "test 0",
+    "header": "header\n0",
+    "footer": "footer\n0"
+  },
+  {
+    "name": "test 1",
+    "header": "header\n1",
+    "footer": "footer\n1"
+  },
+  {
+    "name": "test 2",
+    "header": "header\n2",
+    "footer": "footer\n2"
+  },
+  {
+    "name": "test 3",
+    "header": "header\n3",
+    "footer": "footer\n3"
+  },
+  {
+    "name": "test 4",
+    "header": "header\n4",
+    "footer": "footer\n4"
+  }
+]

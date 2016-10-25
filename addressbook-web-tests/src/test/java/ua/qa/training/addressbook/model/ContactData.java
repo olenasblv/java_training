@@ -1,40 +1,91 @@
 package ua.qa.training.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
 
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
+
     @Expose
+    @Column(name = "lastname")
     private String lastName;
+
     @Expose
+    @Column(name = "firstname")
     private String firstName;
+
     @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
+
     @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
+
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
+
     @Expose
+    @Column(name = "email")
+    @Type(type = "text")
     private String email;
+
+    @Column(name = "email2")
+    @Type(type = "text")
     private String email2;
+
+    @Column(name = "email3")
+    @Type(type = "text")
     private String email3;
+
     @Expose
+    @Column(name = "homepage")
+    @Type(type = "text")
     private String homepage;
+
     @Expose
+    @Transient
     private int birthdayYear;
+
     @Expose
+    @Transient
     private int birthdayDay;
+
     @Expose
+    @Transient
     private String birthdayMonth;
+
     @Expose
+    @Transient
     private String group;
+
+    @Transient
     private String allPhones;
+
+    @Transient
     private String allEmails;
+
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
+
+    @Transient
     private String details;
-    private File photo;
 
 
     public int getId() {
@@ -200,12 +251,12 @@ public class ContactData {
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = this.photo;
+        this.photo = photo.getPath();
         return this;
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
 

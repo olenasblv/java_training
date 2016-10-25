@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by osoboleva on 17.10.2016.
  */
-//-c 5 -f src/test/resources/groups.csv
+//-c 5 -f src/test/resources/groups.json -d json
 public class GroupDataGenerator {
 
     @Parameter(names = "-c", description = "Group count")
