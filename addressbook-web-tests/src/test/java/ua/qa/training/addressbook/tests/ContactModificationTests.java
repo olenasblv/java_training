@@ -4,6 +4,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.qa.training.addressbook.model.ContactData;
 import ua.qa.training.addressbook.model.Contacts;
+import ua.qa.training.addressbook.model.GroupData;
+import ua.qa.training.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,10 +18,11 @@ public class ContactModificationTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         if (app.db().contacts().size() == 0) {
+            Groups groups = app.db().groups();
             app.goTo().homePage();
             app.contact().create(new ContactData().withLastName("Last_name_test").withFirstName("First_name_test").withAddress("Address_test")
                     .withHomePhone("123456789").withEmail("email@mail.ru").withHomepage("homepage.com").withBirthdayDay(5)
-                    .withBirthdayMonth("April").withBirthdayYear(1990)); //.withGroup("[none]")
+                    .withBirthdayMonth("April").withBirthdayYear(1990).inGroup(groups.iterator().next()));
         }
     }
 
