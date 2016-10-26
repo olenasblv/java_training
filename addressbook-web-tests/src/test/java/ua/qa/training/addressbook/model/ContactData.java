@@ -5,6 +5,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -66,10 +68,6 @@ public class ContactData {
     @Transient
     private String birthdayMonth;
 
-    @Expose
-    @Transient
-    private String group;
-
     @Transient
     private String allPhones;
 
@@ -81,6 +79,10 @@ public class ContactData {
 
     @Transient
     private String details;
+
+    @Expose
+    @ManyToMany
+    private Set<GroupData> groups = new HashSet<>();
 
 
     public int getId() {
