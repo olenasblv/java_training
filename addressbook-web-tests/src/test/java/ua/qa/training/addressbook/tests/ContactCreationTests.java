@@ -38,26 +38,26 @@ public class ContactCreationTests extends TestBase {
 
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact) {
+        Contacts before = app.db().contacts();
         app.goTo().homePage();
-        Contacts before = app.contact().all();
         File photo = new File("src/test/resources/cat.jpg");
         app.contact().create(contact.withGroup("test 1").withPhoto(photo));
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before.withAdded(
                 contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
 
-    @Test(enabled = false)
+    @Test //(enabled = false)
     public void testBadContactCreation() {
+        Contacts before = app.db().contacts();
         app.goTo().homePage();
-        Contacts before = app.contact().all();
         ContactData contact = new ContactData().withLastName("Last_name_test'").withFirstName("First_name_test").withAddress("Address_test")
                 .withHomePhone("123456789").withEmail("email@mail.ru").withHomepage("homepage.com").withBirthdayDay(5)
-                .withBirthdayMonth("April").withBirthdayYear(1990).withGroup("test1");
+                .withBirthdayMonth("April").withBirthdayYear(1990).withGroup("[none]");
         app.contact().create(contact);
         assertThat(app.contact().count(), equalTo(before.size()));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
         assertThat(after, equalTo(before));
     }
 
