@@ -8,6 +8,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ua.qa.training.addressbook.appmanager.ApplicationManager;
+import ua.qa.training.addressbook.model.ContactData;
+import ua.qa.training.addressbook.model.Contacts;
 import ua.qa.training.addressbook.model.GroupData;
 import ua.qa.training.addressbook.model.Groups;
 
@@ -57,4 +59,21 @@ public class TestBase {
                     .collect(Collectors.toSet())));
         }
     }
+
+    public void verifyContactListInUI() {
+        if (Boolean.getBoolean("verifyUI")) {
+            Contacts dbContacts = app.db().contacts();
+            Contacts uiContacts = app.contact().all();
+            assertThat(uiContacts, equalTo(dbContacts.stream()
+                    .map((c) -> new ContactData()
+                            .withId(c.getId())
+                            .withLastName(c.getLastName())
+                            .withFirstName(c.getFirstName())
+                            .withAddress(c.getAddress())
+                    .withAllEmails(c.getAllEmails())
+                    .withAllPhones(c.getAllPhones()))
+                    .collect(Collectors.toSet())));
+        }
+    }
+
 }
