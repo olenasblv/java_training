@@ -81,7 +81,9 @@ public class ContactData {
     private String details;
 
     @Expose
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<GroupData> groups = new HashSet<>();
 
 
@@ -211,15 +213,6 @@ public class ContactData {
         return birthdayMonth;
     }
 
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
     public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
         return this;
@@ -253,10 +246,16 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        if (photo == null) { return null; }
-        else { return new File(photo); }
+        if (photo == null) {
+            return null;
+        } else {
+            return new File(photo);
+        }
     }
 
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
 
     @Override
     public String toString() {
@@ -294,5 +293,10 @@ public class ContactData {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (homepage != null ? homepage.hashCode() : 0);
         return result;
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 }
