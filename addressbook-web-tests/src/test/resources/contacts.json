@@ -6,8 +6,19 @@
     "homePhone": "(123)0",
     "email": "email0@email.com",
     "homepage": "homepage0.com",
-    "birthdayYear": 1948,
-    "birthdayDay": 4,
+    "birthdayYear": 1906,
+    "birthdayDay": 14,
     "birthdayMonth": "May"
+  },
+  {
+    "lastName": "lastname 1",
+    "firstName": "firstname 1",
+    "address": "address 1",
+    "homePhone": "(123)1",
+    "email": "email1@email.com",
+    "homepage": "homepage1.com",
+    "birthdayYear": 1967,
+    "birthdayDay": 14,
+    "birthdayMonth": "August"
   }
 ]
