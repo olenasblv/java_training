@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ua.qa.training.addressbook.appmanager.ContactHelper;
 import ua.qa.training.addressbook.model.ContactData;
+import ua.qa.training.addressbook.model.Contacts;
 import ua.qa.training.addressbook.model.GroupData;
 import ua.qa.training.addressbook.model.Groups;
 
@@ -34,8 +35,9 @@ public class ContactAddToGroupTest extends TestBase{
 
     @Test
     public void testContactAddToGroup(ContactData contact){
+        Contacts before = app.db().contacts();
         app.goTo().homePage();
-        app.contact().selectContactById(contact.getId());
+        app.contact().addContactToGroup(contact);
 
     }
 

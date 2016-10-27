@@ -61,7 +61,8 @@ public class ContactHelper extends HelperBase {
     }
 
     private void selectGroup(ContactData contactData) {
-        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText("test %s");
+        new Select(wd.findElement(By.name("to_group")))
+                .selectByVisibleText(contactData.getGroups().iterator().next().getName());
     }
 
     public void initContactModification(int id) {
@@ -92,6 +93,14 @@ public class ContactHelper extends HelperBase {
 
     public void submitContactModification() {
         click(By.name("update"));
+    }
+
+    public void submitContactAdditionToGroup() {
+        click(By.name("add"));
+    }
+
+    public void goToCurrentGroupPage(){
+        wd.findElement(By.xpath(".//*[@id='content']/div/i/a")).click();
     }
 
     public void deleteSelectedContacts() {
@@ -126,11 +135,12 @@ public class ContactHelper extends HelperBase {
         contactCache = null;
     }
 
-    public void addContactToGroup(ContactData contact){
+    public void addContactToGroup(ContactData contact) {
         selectContactById(contact.getId());
-        selectGroup(contact.getGroups());
+        selectGroup(contact);
+        submitContactAdditionToGroup();
+        goToCurrentGroupPage();
     }
-
 
 
     public boolean isThereAContact() {

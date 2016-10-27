@@ -258,6 +258,11 @@ public class ContactData {
         return new Groups(groups);
     }
 
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
+    }
+
     @Override
     public String toString() {
         return "ContactData{" +
@@ -294,10 +299,5 @@ public class ContactData {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (homepage != null ? homepage.hashCode() : 0);
         return result;
-    }
-
-    public ContactData inGroup(GroupData group) {
-        groups.add(group);
-        return this;
     }
 }
