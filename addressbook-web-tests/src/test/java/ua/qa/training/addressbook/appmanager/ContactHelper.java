@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ua.qa.training.addressbook.model.ContactData;
 import ua.qa.training.addressbook.model.Contacts;
+import ua.qa.training.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -57,6 +58,10 @@ public class ContactHelper extends HelperBase {
 
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
+    private void selectGroup(ContactData contactData) {
+        new Select(wd.findElement(By.name("to_group"))).selectByVisibleText("test %s");
     }
 
     public void initContactModification(int id) {
@@ -120,6 +125,13 @@ public class ContactHelper extends HelperBase {
         submitContactDeletion();
         contactCache = null;
     }
+
+    public void addContactToGroup(ContactData contact){
+        selectContactById(contact.getId());
+        selectGroup(contact.getGroups());
+    }
+
+
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));

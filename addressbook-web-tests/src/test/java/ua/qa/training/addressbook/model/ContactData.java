@@ -87,6 +87,7 @@ public class ContactData {
     private Set<GroupData> groups = new HashSet<>();
 
 
+
     public int getId() {
         return id;
     }
