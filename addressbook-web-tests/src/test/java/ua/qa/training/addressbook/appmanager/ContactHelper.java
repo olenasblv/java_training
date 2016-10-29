@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ua.qa.training.addressbook.model.ContactData;
 import ua.qa.training.addressbook.model.Contacts;
+import ua.qa.training.addressbook.model.GroupData;
 import ua.qa.training.addressbook.model.Groups;
 
 import java.util.List;
@@ -49,8 +50,8 @@ public class ContactHelper extends HelperBase {
         if (creation) {
             if (contactData.getGroups().size() > 0) {
                 Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
             }
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -60,9 +61,8 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
-    private void selectGroup(ContactData contactData) {
-        new Select(wd.findElement(By.name("to_group")))
-                .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+    private void selectGroup(GroupData groupData) {
+        new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(groupData.getId()));
     }
 
     public void initContactModification(int id) {
@@ -99,7 +99,11 @@ public class ContactHelper extends HelperBase {
         click(By.name("add"));
     }
 
-    public void goToCurrentGroupPage(){
+    public void removeContactFromGroupBtn() {
+        click(By.name("add"));
+    }
+
+    public void goToCurrentGroupPage() {
         wd.findElement(By.xpath(".//*[@id='content']/div/i/a")).click();
     }
 
@@ -135,13 +139,18 @@ public class ContactHelper extends HelperBase {
         contactCache = null;
     }
 
-    public void addContactToGroup(ContactData contact) {
+    public void addContactToGroup(ContactData contact, GroupData group) {
         selectContactById(contact.getId());
-        selectGroup(contact);
+        selectGroup(group);
         submitContactAdditionToGroup();
         goToCurrentGroupPage();
     }
 
+    public void removeContactFromGroup(ContactData contact) {
+        selectContactById(contact.getId());
+        removeContactFromGroupBtn();
+        goToCurrentGroupPage();
+    }
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));

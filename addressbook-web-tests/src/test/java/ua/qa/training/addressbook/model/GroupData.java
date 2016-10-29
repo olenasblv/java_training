@@ -33,7 +33,7 @@ public class GroupData {
     private String footer;
 
     @Expose
-    @ManyToMany (mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups")
     private Set<ContactData> contacts = new HashSet<>();
 
     public Contacts getContacts() {
