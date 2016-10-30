@@ -55,7 +55,7 @@ public class TestBase {
             Groups dbGroups = app.db().groups();
             Groups uiGroups = app.group().all();
             assertThat(uiGroups, equalTo(dbGroups.stream()
-                    .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
+                    .map((g) -> new GroupData().withId(g.getId()).withName())
                     .collect(Collectors.toSet())));
         }
     }

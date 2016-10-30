@@ -7,7 +7,10 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @XStreamAlias("group")
 @Entity
@@ -49,7 +52,8 @@ public class GroupData {
         return this;
     }
 
-    public GroupData withName(String name) {
+    public GroupData withName() {
+        String name ="group "+ System.currentTimeMillis();
         this.name = name;
         return this;
     }

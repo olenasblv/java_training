@@ -21,7 +21,7 @@ public class DBConnectionTest {
             Groups groups = new Groups();
             while (rs.next()) {
                 groups.add(new GroupData().withId(rs.getInt("group_id"))
-                        .withName(rs.getString("group_name"))
+                        .withName()
                         .withHeader(rs.getString("group_header"))
                         .withFooter(rs.getString("group_footer")));
             }

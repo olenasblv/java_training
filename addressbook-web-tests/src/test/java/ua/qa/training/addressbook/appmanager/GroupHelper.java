@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import ua.qa.training.addressbook.model.GroupData;
 import ua.qa.training.addressbook.model.Groups;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by osoboleva on 9/18/2016.
@@ -97,7 +95,7 @@ public class GroupHelper extends HelperBase {
         for (WebElement element : elements) {      // переменная element пробегает по списку elements
             String name = element.getText();      // из каждого элемента получаем текст, который будет именем группы
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groupCache.add(new GroupData().withId(id).withName(name));       // добавляем созданный объект в список
+            groupCache.add(new GroupData().withId(id).withName());       // добавляем созданный объект в список
         }
         return new Groups(groupCache);
     }

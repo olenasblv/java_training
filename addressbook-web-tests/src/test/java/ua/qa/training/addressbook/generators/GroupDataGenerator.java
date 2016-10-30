@@ -6,6 +6,7 @@ import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.CustomObjectInputStream;
 import ua.qa.training.addressbook.model.GroupData;
 
 import java.io.File;
@@ -31,7 +32,7 @@ public class GroupDataGenerator {
     public String format;
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         GroupDataGenerator generator = new GroupDataGenerator();
         JCommander jCommander = new JCommander(generator);
         try {
@@ -43,7 +44,7 @@ public class GroupDataGenerator {
         generator.run();
     }
 
-    private void run() throws IOException {
+    private void run() throws IOException, InterruptedException {
         List<GroupData> groups = generateGroups(count);
         if (format.equals("csv")) {
             saveAsCsv(groups, new File(file));
@@ -82,13 +83,14 @@ public class GroupDataGenerator {
         }
     }
 
-    private List<GroupData> generateGroups(int count) {
+    private List<GroupData> generateGroups(int count) throws InterruptedException {
         List<GroupData> groups = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             groups.add(new GroupData()
-                    .withName(String.format("test %s", i))
+                    .withName()
                     .withHeader(String.format("header %s", i))
                     .withFooter(String.format("footer %s", i)));
+            Thread.sleep(1);
         }
         return groups;
     }
