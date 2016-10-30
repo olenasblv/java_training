@@ -8,7 +8,6 @@ import org.testng.Assert;
 import ua.qa.training.addressbook.model.ContactData;
 import ua.qa.training.addressbook.model.Contacts;
 import ua.qa.training.addressbook.model.GroupData;
-import ua.qa.training.addressbook.model.Groups;
 
 import java.util.List;
 
@@ -61,8 +60,12 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
-    private void selectGroup(GroupData groupData) {
+    private void selectAddToGroup(GroupData groupData) {
         new Select(wd.findElement(By.name("to_group"))).selectByValue(Integer.toString(groupData.getId()));
+    }
+
+    private void selectGroup(GroupData groupData) {
+        new Select(wd.findElement(By.name("group"))).selectByValue(Integer.toString(groupData.getId()));
     }
 
     public void initContactModification(int id) {
@@ -100,7 +103,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void removeContactFromGroupBtn() {
-        click(By.name("add"));
+        click(By.name("remove"));
     }
 
     public void goToCurrentGroupPage() {
@@ -141,12 +144,13 @@ public class ContactHelper extends HelperBase {
 
     public void addContactToGroup(ContactData contact, GroupData group) {
         selectContactById(contact.getId());
-        selectGroup(group);
+        selectAddToGroup(group);
         submitContactAdditionToGroup();
         goToCurrentGroupPage();
     }
 
-    public void removeContactFromGroup(ContactData contact) {
+    public void removeContactFromGroup(ContactData contact,GroupData group) {
+        selectGroup(group);
         selectContactById(contact.getId());
         removeContactFromGroupBtn();
         goToCurrentGroupPage();
