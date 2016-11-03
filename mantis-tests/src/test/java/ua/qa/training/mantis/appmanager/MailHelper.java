@@ -2,6 +2,7 @@ package ua.qa.training.mantis.appmanager;
 
 import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
+import ua.qa.training.mantis.model.MailMessage;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
