@@ -1,6 +1,10 @@
 package ua.qa.training.mantis.appmanager;
 
 import org.openqa.selenium.By;
+import ru.lanwen.verbalregex.VerbalExpression;
+import ua.qa.training.mantis.model.MailMessage;
+
+import java.util.List;
 
 /**
  * Created by osoboleva on 11/1/2016.
@@ -24,4 +28,5 @@ public class RegistrationHelper extends HelperBase {
         type(By.name("password_confirm"), password);
         click(By.cssSelector("input[value='Update User']"));
     }
+
 }

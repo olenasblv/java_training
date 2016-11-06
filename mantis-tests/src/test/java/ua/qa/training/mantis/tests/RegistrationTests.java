@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.testng.AssertJUnit.assertTrue;
+import static ua.qa.training.mantis.appmanager.HelperBase.findConfirmationLink;
 
 /**
  * Created by osoboleva on 11/1/2016.
@@ -32,14 +33,9 @@ public class RegistrationTests extends TestBase {
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.registration().finish(confirmationLink, password);
-        assertTrue (app.newSession().login(user, password));
+        assertTrue(app.newSession().login(user, password));
     }
 
-    private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
-        MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-        VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
-        return regex.getText(mailMessage.text);
-    }
 
     @AfterMethod(alwaysRun = true)
     public void stopMailServer() {
