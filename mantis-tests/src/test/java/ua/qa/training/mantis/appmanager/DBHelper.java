@@ -6,7 +6,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ua.qa.training.mantis.model.Users;
-import ua.qa.training.mantis.tests.TestBase;
 
 
 import java.util.List;
