@@ -103,9 +103,9 @@ public class JamesHelper {
 
     private void write(String value) {
         try {
-            out.print(value);
+            out.println(value);
             out.flush();
-            System.out.print(value);
+            System.out.println(value);
         } catch (Exception e) {
             e.printStackTrace();
         }
