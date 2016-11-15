@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Set;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.AssertJUnit.assertEquals;
 
 /**
@@ -31,6 +32,12 @@ public class SoapTests extends TestBase {
         Issue issue = new Issue().withSummary("Test issue")
                 .withDescription("Test issue description").withProject(projects.iterator().next());
         Issue created = app.soap().addIssue(issue);
-        assertEquals(issue.getSummary(),created.getSummary());
+        assertEquals(issue.getSummary(), created.getSummary());
+    }
+
+    @Test
+    public void testSkippingTest() throws RemoteException, ServiceException, MalformedURLException {
+        skipIfNotFixed(0000002);
+        assertEquals(2 + 2, 4);
     }
 }
