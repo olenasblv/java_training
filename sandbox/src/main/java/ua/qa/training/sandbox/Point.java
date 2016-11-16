@@ -19,7 +19,6 @@ public class Point {
   }
 
 
-  // сделать в классе Point метод, который возвращает точку, симметричную данной относительно центра координат
 
   public Point symmetric() {
     return new Point(-1 * x, -1 * y);

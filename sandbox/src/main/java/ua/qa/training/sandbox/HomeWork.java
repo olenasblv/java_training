@@ -14,11 +14,9 @@ public class HomeWork {
     Point p3 = new Point(4, 5);
     Point p4 = new Point(7, 9);
 
-    // вывод в консоль результата статического метода класса с объявлением переменной distanceResult
     double distanceResult = distance(p1, p2);
     System.out.println("растояние между точками p1 и p2 = " + distanceResult);
 
-    // вывод в консоль результата метода объекта без объявления промежуточной переменной
     System.out.println("расстояние между точками p1 и p2 = " + p1.distanceToPoint(p2));
 
     // return the symmetric point to p1

@@ -9,7 +9,7 @@ public class Square {
 
   public Square(double l){
 
-    this.l = l;  // .l - атрибут, l- аргумент функции
+    this.l = l;
   }
 
 
