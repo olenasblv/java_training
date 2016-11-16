@@ -5,17 +5,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import com.jayway.restassured.RestAssured;
 import org.apache.http.client.fluent.Executor;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.message.BasicNameValuePair;
-import org.testng.Assert;
-import org.testng.AssertJUnit;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
-import java.util.List;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
@@ -23,7 +20,12 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by osoboleva on 11/15/2016.
  */
-public class RestTests extends TestBase {
+public class RestAssuredTests {
+
+    @BeforeClass
+    public void init(){
+        RestAssured.authentication = RestAssured.basic("LSGjeU4yP1X493ud1hNniA==", "");
+    }
 
     @Test
     public void testCreateIssue() throws IOException {
@@ -35,26 +37,20 @@ public class RestTests extends TestBase {
         assertEquals(newIssues, oldIssues);
     }
 
-    @Test
-    public void testSkippingTest() throws IOException {
-        skipIfNotFixed(9);
-        assertEquals(2 + 2, 4);
-    }
 
     private Set<Issue> getIssues() throws IOException {
-        String json = getExecutor().execute(Request.Get("http://demo.bugify.com/api/issues.json")).returnContent().asString();
+        String json = RestAssured.get("http://demo.bugify.com/api/issues.json").asString();
         JsonElement parsed = new JsonParser().parse(json);
         JsonElement issues = parsed.getAsJsonObject().get("issues");
         return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {
         }.getType());
     }
 
-
     private int createIssue(Issue newIssue) throws IOException {
-        String json = getExecutor().execute(Request.Post("http://demo.bugify.com/api/issues.json")
-                .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
-                        new BasicNameValuePair("description", newIssue.getDescription())))
-                .returnContent().asString();
+        String json = RestAssured.given()
+                .parameter("subject", newIssue.getSubject())
+                .parameter("description", newIssue.getDescription())
+                .post("http://demo.bugify.com/api/issues.json").asString();
         JsonElement parsed = new JsonParser().parse(json);
         return parsed.getAsJsonObject().get("issue_id").getAsInt();
     }
