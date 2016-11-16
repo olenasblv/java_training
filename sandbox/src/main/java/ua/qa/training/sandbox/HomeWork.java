@@ -15,9 +15,9 @@ public class HomeWork {
     Point p4 = new Point(7, 9);
 
     double distanceResult = distance(p1, p2);
-    System.out.println("растояние между точками p1 и p2 = " + distanceResult);
+    System.out.println("distance between points p1 and p2 = " + distanceResult);
 
-    System.out.println("расстояние между точками p1 и p2 = " + p1.distanceToPoint(p2));
+    System.out.println("distance between points p1 and p2 = " + p1.distanceToPoint(p2));
 
     // return the symmetric point to p1
     // System.out.println("symmetric point" + p1.symmetric().x + p1.symmetric().y);
