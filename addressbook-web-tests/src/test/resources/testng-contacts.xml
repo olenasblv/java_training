@@ -3,12 +3,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="Contacts">
         <classes>
-            <class name="ua.qa.training.addressbook.tests.ContactCreationTests" />
             <class name="ua.qa.training.addressbook.tests.ContactModificationTests" />
-            <class name="ua.qa.training.addressbook.tests.ContactDeletionTests" />
-            <class name="ua.qa.training.addressbook.tests.ContactPhoneTests" />
-            <class name="ua.qa.training.addressbook.tests.ContactAddressTest" />
-            <class name="ua.qa.training.addressbook.tests.ContactEmailsTests" />
         </classes>
     </test>
 </suite>
